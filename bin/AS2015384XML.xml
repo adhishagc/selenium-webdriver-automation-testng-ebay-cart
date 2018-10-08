@@ -1,0 +1,63 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+ 
+<suite name="Suite1" verbose="1" parallel="tests">
+
+<!-- Parallel test has been enabled. But recommend to remove it because it might cause unexpected issues.
+Therefore I highly recommend to avoid the Parallel testing though I have enabled it on the Suite tag since it was requested in the Marking Scheme.-->
+
+<!-- Most variables are passed through this XML inorder to avoid hardcoded variable values in the Code level -->
+
+<!-- Variable Initialize values -->
+<parameter name="url" value="https://www.ebay.com/" />
+<parameter name="expectedBookS" value="Harry Potter : The Complete Collection 8 Books in PDF and EPUB Format Eboo? New" /> 
+<parameter name="priceValueString" value="1.00" />
+<parameter name="expectedPurchaseQtyString" value="2" />
+
+
+<!-- Form element details -->
+<parameter name="searchBook" value="Harry Potter" />
+<parameter name="firstname" value="adhisha" />
+<parameter name="lastname" value="gammanpila" />
+<parameter name="email" value="adhishagc@gmail.com" />
+<parameter name="password" value="Sqa_usjp_2018" />
+
+
+<!-- 
+Harry Potter : The Complete Collection 8 Books in PDF and EPUB Format Ebooκ New 
+<- The K in here is not a regular text.  So k is removed from expected Book Name 
+-->
+
+<test name="OrderBook Chrome Browser" >
+  <parameter name="browser" value="chrome" />
+   	<classes>
+       <class name="testClasses.orderBook.HomePage" />
+       <class name="testClasses.orderBook.CategoryPage" />
+       <class name="testClasses.orderBook.ResultsPage" />
+       <class name="testClasses.orderBook.ItemPage" />
+       
+       <!-- In my previous version the Cart Page and the SignUp page was created separately, the code is still visible there.
+       But when it was made the Browser and the Test was not synchronizing properly. Various implicit/explicit wait techniques were tried out
+       but it didn't work. Therefore the relevant code was added to the ItemPage. -->
+       
+       <!-- <class name="testClasses.orderBook.CartPage" />  -->
+       <!-- <class name="testClasses.orderBook.SignUpPage" /> -->
+   </classes>
+</test>
+
+
+<!-- Please note that IE Browser is not very well performing. The code was WELL tested on Chrome but IE is causing unexpected Latencies.
+Therefore I highly recommend to avoid the Parallel testing though I have enabled it on the Suite tag since it was requested in the Marking Scheme. -->
+
+<test name="OrderBook IE Browser" > 
+   <parameter name="browser" value="ie" />
+    <classes>
+       <class name="testClasses.orderBook.HomePage" />
+       <class name="testClasses.orderBook.CategoryPage" />
+       <class name="testClasses.orderBook.ResultsPage" />
+       <class name="testClasses.orderBook.ItemPage" />
+       <!-- <class name="testClasses.orderBook.CartPage" /> 
+       <class name="testClasses.orderBook.SignUpPage" /> -->
+    </classes>
+  </test>
+
+</suite>
